@@ -10,7 +10,7 @@ matrix:
       language: cpp
       env: OPENSSL_ROOT_DIR=/usr/local/opt/openssl
 
-cenv:
+env:
   global:
     - STEEM_VERSION=0.12.2
 
