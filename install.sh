@@ -13,7 +13,6 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
 else
     # Install some custom requirements on Linux
     echo "Linux!"
-    sudo add-apt-repository ppa:ubuntu-toolchain-r/test
     sudo apt-get update
     sudo apt-get install -y --no-install-recommends \
       ca-certificates \
