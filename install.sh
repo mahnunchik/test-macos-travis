@@ -13,6 +13,7 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
 else
     # Install some custom requirements on Linux
     echo "Linux!"
+    sudo add-apt-repository ppa:ubuntu-toolchain-r/test
     sudo apt-get update
     sudo apt-get install -y --no-install-recommends \
       ca-certificates \
@@ -26,4 +27,15 @@ else
       automake \
       libtool \
       python3
+      autotools-dev \
+      libbz2-dev \
+      libicu-dev
+
+    export BOOST_ROOT=$HOME/opt/boost_1_60_0
+    wget -c 'http://sourceforge.net/projects/boost/files/boost/1.60.0/boost_1_60_0.tar.bz2/download' \
+        -O boost_1_60_0.tar.bz2
+    tar xjf boost_1_60_0.tar.bz2
+    cd boost_1_60_0/
+    ./bootstrap.sh "--prefix=$BOOST_ROOT"
+    ./b2 install
 fi
