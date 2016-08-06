@@ -1,9 +1,10 @@
+
 matrix:
   include:
     - os: linux
       dist: trusty
       sudo: required
-      language: cpp
+      language: generic
     - os: osx
       osx_image: xcode7.3
       language: cpp
@@ -18,5 +19,6 @@ before_script:
   - git checkout v${STEEM_VERSION}
   - git submodule update --init --recursive
 script:
+  - cd steem
   - cmake .
   - make
