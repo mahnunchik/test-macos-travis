@@ -12,4 +12,4 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
 else
     # Install some custom requirements on Linux
     echo "Linux!"
-fig
+fi
