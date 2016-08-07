@@ -26,8 +26,7 @@ script:
   - cmake -DENABLE_INSTALLER=ON .
   - make
   - make install
-  - tar -cvzf steem-${STEEM_VERSION}-Darwin.tgz ./install
-  - ls -lah
+  - tar -cvzf steem-${STEEM_VERSION}-Darwin.tgz -C ./install .
 deploy:
   provider: releases
   api_key:
