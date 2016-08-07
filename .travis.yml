@@ -25,3 +25,4 @@ script:
   - cd ${TRAVIS_BUILD_DIR}/steem
   - cmake .
   - make
+  - make install
