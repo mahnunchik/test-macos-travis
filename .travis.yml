@@ -1,20 +1,18 @@
 
-matrix:
-  include:
-    - os: linux
-      dist: trusty
-      sudo: required
-      language: cpp
-    - os: osx
-      osx_image: xcode7.3
-      language: cpp
-      env: OPENSSL_ROOT_DIR=/usr/local/opt/openssl
-
+os: osx
+osx_image: xcode7.3
+language: cpp
 env:
-  global:
-    - STEEM_VERSION=0.12.2
+  - OPENSSL_ROOT_DIR=/usr/local/opt/openssl
+  - STEEM_VERSION=0.12.2
 
-install: ./install.sh
+install:
+  - brew update
+  - brew upgrade cmake git autoconf automake libtool openssl
+  - brew install qt5 python3
+  # Downgrade boost to 1.58.0
+  - brew unlink boost
+  - brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/1fa330ce7a067406ff05392dead86cccdc0794bd/Formula/boost.rb
 before_script:
   - git clone https://github.com/steemit/steem.git
   - cd steem
