@@ -23,6 +23,14 @@ before_script:
   - git submodule update --init --recursive
 script:
   - cd ${TRAVIS_BUILD_DIR}/steem
-  - cmake .
+  - cmake -DENABLE_INSTALLER=ON .
   - make
   - make install
+  - tar -cvzf steem-${STEEM_VERSION}-Darwin.tgz ./install
+  - ls -lah
+deploy:
+  provider: releases
+  api_key:
+    secure: "lCzaW8X63LIGcwppi2BI4r/8H1k323X5F0X9EGAR62pErKOuBPrC1H8erjLlsEG5h887ZYGSFU0RJ5A4IzMUZb3bZ9wigAenXRA+f8stAK0dk+ig6S1LoLAthrM7oZmEXw3fz7mEmLIs33cSsw8qKQA7DiGiZ345OAGEzp+BtEWA19vNZRTLU6HEcS8kcyB6iElMqBVqju3fxxg0T8/xVr1jK1UtDktaf6+71tjJZhzTnbRrOfNiKZrax5NByAtogh2zh2D+X/JJceA6/Bc1fixpmiPNQdTgqZTsz9mnB/IFgOVO8q5zOszsSDFUyjY4jBOq07aj9VfGjrw/SRLxEoaSfS6F63oIfM4f6utehWI9qGU4/K/0TsDf97SFwAQheh1dm4gkZwYPM2s7yS6GxoPHufU+Bi6hEUogMcwGS1sooAqf98iaoqh7l1TVsqLLBlJGjpHs9TFOxAc3MFguXedDuMPvWIvX0Y+y1vKdyEd7YWdMhC4+MB4tVpCma6M2SQqduKkXSMpCFmTEW8ALULXnw+oriDeHIMjJ5pLA4B+X4na6HW60TvK5y00GUusyDWXaryRunn9eZJGvY2ikEEtsBrzM1KFrt/Fxm0VWDxZ2LJaUyex1RG/QJJUQHGZAxfRVvLT80LeYWd20ZP9t2UcnBEsJ2s31cHI2ycRIU/w="
+  file: steem/steem-${STEEM_VERSION}-Darwin.tgz
+  skip_cleanup: true
