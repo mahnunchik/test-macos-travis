@@ -1,4 +1,4 @@
-language: c/c++
+language: "c/c++"
 build:
   pre_ci_boot:
     image_name: ubuntu
