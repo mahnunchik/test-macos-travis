@@ -1,0 +1,6 @@
+build:
+  pre_ci_boot:
+    image_name: ubuntu
+    image_tag: 16.04
+  ci:
+    -ls -lah
