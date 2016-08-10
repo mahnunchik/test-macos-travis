@@ -21,10 +21,15 @@ build:
       automake
       libtool
       python3
+      ruby
     - git clone https://github.com/steemit/steem.git
     - cd steem
     - git checkout v${STEEM_VERSION}
     - git submodule update --init --recursive
-    - cmake .
-    - make
+    - cmake -DENABLE_INSTALLER=ON .
+    - make package
+    - ls -lah
+    - ls -lah install
+  on_success:
+    - gem install dpl
     - ls -lah
