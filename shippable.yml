@@ -1,7 +1,30 @@
 language: none
+env:
+  global:
+    - STEEM_VERSION=0.12.2
+
 build:
   pre_ci_boot:
     image_name: ubuntu
     image_tag: 16.04
   ci:
-    - ls -lah
+    - apt-get update
+    - apt-get install -y --no-install-recommends
+      ca-certificates
+      build-essential
+      cmake
+      git
+      doxygen
+      libboost-all-dev
+      libssl-dev
+      autogen
+      automake
+      libtool
+      python3
+  - git clone https://github.com/steemit/steem.git
+  - cd steem
+  - git checkout v${STEEM_VERSION}
+  - git submodule update --init --recursive
+  - cmake .
+  - make
+  - ls -lah
