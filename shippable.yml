@@ -30,6 +30,7 @@ build:
     - make package
     - ls -lah
     - ls -lah install
+    - ls -lah packages
   on_success:
     - gem install dpl
-    - ls -lah
+    - ls -lah packages
