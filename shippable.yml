@@ -21,10 +21,10 @@ build:
       automake
       libtool
       python3
-  - git clone https://github.com/steemit/steem.git
-  - cd steem
-  - git checkout v${STEEM_VERSION}
-  - git submodule update --init --recursive
-  - cmake .
-  - make
-  - ls -lah
+    - git clone https://github.com/steemit/steem.git
+    - cd steem
+    - git checkout v${STEEM_VERSION}
+    - git submodule update --init --recursive
+    - cmake .
+    - make
+    - ls -lah
