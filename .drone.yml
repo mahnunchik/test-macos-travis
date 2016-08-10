@@ -2,15 +2,3 @@ build:
   image: "ubuntu:16.04"
   commands:
     - apt-get update
-    - apt-get install -y --no-install-recommends
-      ca-certificates
-      build-essential
-      cmake
-      git
-      doxygen
-      libboost-all-dev
-      libssl-dev
-      autogen
-      automake
-      libtool
-      python3
