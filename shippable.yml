@@ -1,7 +1,10 @@
 language: none
 env:
   global:
-    - STEEM_VERSION=0.12.2
+    - VERSION_MAJOR=0
+    - VERSION_MINOR=12
+    - VERSION_PATCH=2
+    - secure: UONz5/DCdkFgbZDgOCMg0oWBePDceCMTUnaOPeDXk90TMStUw/owxpLf7Hei1XhlTLixuV0/eH1hJi+FUF+zH4RgcNU3i+rAOoci7ntQJNavTRgIoDlH8TqFJiPqEwcMB7ml4BT1edMUx3kLs40sziNnWsNrd/xh32/1xIq2qOhNw1yApkNcqXGsCHo8co5nac19b7TbFarm0l9Nl87bOOh0EKH1Nwb2zeEo7HtCuOWaRXmH1ReMZjaaSVVlZT/WtgnkSaXovr0MyGkCq7qMVEwvcNlc3jWTpFwRVKRZMACOuBmQFuPMg5aX5d9UgxzWcUcxKAevYwenncdpqdm/4w==
 
 build:
   pre_ci_boot:
@@ -24,9 +27,14 @@ build:
       ruby
     - git clone https://github.com/steemit/steem.git
     - cd steem
-    - git checkout v${STEEM_VERSION}
+    - git checkout v${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}
     - git submodule update --init --recursive
-    - cmake -DENABLE_INSTALLER=ON .
+    - cmake
+      -DENABLE_INSTALLER=ON
+      -DVERSION_MAJOR=$VERSION_MAJOR
+      -DVERSION_MINOR=$VERSION_MINOR
+      -DVERSION_PATCH=$VERSION_PATCH
+      .
     - make package
     - ls -lah
     - ls -lah install
@@ -34,3 +42,8 @@ build:
   on_success:
     - gem install dpl
     - ls -lah packages
+    - dpl
+      --provider=releases
+      --api-key=$GITHUB_API_KEY
+      --overwrite=true
+      --file=packages/steem-${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-Linux.tar.gz
