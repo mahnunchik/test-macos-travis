@@ -32,11 +32,9 @@ build:
     - make install
     - ls -lah
     - ls -lah install
-    - ls -lah packages
     - tar -cvzf steem-${STEEM_VERSION}-Linux.tgz -C ./install .
   on_success:
     - gem install dpl
-    - ls -lah packages
     - dpl
       --provider=releases
       --api-key=$GITHUB_API_KEY
